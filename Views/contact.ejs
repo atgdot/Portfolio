@@ -1,5 +1,7 @@
 <%- include("partials/header.ejs") %>
 
+<div class="wrapper">
+  <div class="content">
 <section id="contact" class="page-section bg-light">
     <div class="container py-5">
       <div class="text-center">
@@ -32,7 +34,7 @@
       </div>
     </div>
   </section>  
-
+</div>
 <!-- ✅ JavaScript to handle form submission without reload -->
 <script>
 document.addEventListener("DOMContentLoaded", function () {
@@ -66,4 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 </script>
+
+<%- include("partials/footer.ejs") %>
+</div>
 
