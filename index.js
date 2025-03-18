@@ -2,38 +2,35 @@ import express from "express";
 import dotenv from "dotenv";
 import nodemailer from "nodemailer";
 
+dotenv.config();
+
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
-dotenv.config(); // Load environment variables
+// Set EJS as the view engine
+app.set("view engine", "ejs");
+app.set("views", "./views");
 
-// Middleware to parse JSON & form data
+// Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static("Public"));
 
-// Serve static files from "Public"
-
-
-
-// Set Content Security Policy (CSP)
+// Security Headers
 app.use((req, res, next) => {
   res.setHeader(
     "Content-Security-Policy",
     "default-src 'self'; " +
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://cdn.lineicons.com; " +
     "font-src 'self' data: https://fonts.gstatic.com https://cdn.lineicons.com; " +
-    "connect-src 'self' https://cdn.lineicons.com; " +  // Added for font fetching
+    "connect-src 'self' https://cdn.lineicons.com; " +
     "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; " +
     "img-src 'self' data:;"
   );
   next();
 });
 
-
-
-
-
-// Nodemailer configuration
+// Nodemailer Configuration
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 587,
@@ -47,8 +44,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-
-// Handle form submission
+// Handle Contact Form Submission
 app.post("/send-email", async (req, res) => {
   const { name, email, message } = req.body;
 
@@ -67,34 +63,17 @@ app.post("/send-email", async (req, res) => {
     await transporter.sendMail(mailOptions);
     res.json({ success: true, message: "Email sent successfully!" });
   } catch (error) {
-    console.error("Error sending email:", error);  // Log error for debugging
+    console.error("Error sending email:", error);
     res.status(500).json({ success: false, error: "Failed to send email", details: error.message });
   }
 });
-// Routes
-app.get("/", (req, res) => {
-  res.render("index.ejs");
-});
 
-app.get("/about", (req, res) => {
-  res.render("about.ejs");
-});
+// Define Routes
+app.get("/", (req, res) => res.render("index.ejs"));
+app.get("/about", (req, res) => res.render("about.ejs"));
+app.get("/services", (req, res) => res.render("services.ejs"));
+app.get("/portfolio", (req, res) => res.render("portfolio.ejs"));
+app.get("/contact", (req, res) => res.render("contact.ejs"));
 
-app.get("/services", (req, res) => {
-  res.render("services.ejs");
-});
-
-app.get("/portfolio", (req, res) => {
-  res.render("portfolio.ejs");
-});
-
-app.get("/contact", (req, res) => {
-  res.render("contact.ejs");
-});
-
-
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
-});
-
-app.use(express.static("Public"));
+// Vercel requires this export
+export default app;
