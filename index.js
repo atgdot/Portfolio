@@ -18,14 +18,14 @@ app.use(express.static("Public"));
 
 // Security Headers
 app.use((req, res, next) => {
-  res.setHeader(
+  rres.setHeader(
     "Content-Security-Policy",
     "default-src 'self'; " +
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://cdn.lineicons.com; " +
-    "font-src 'self' 'unsafe-inline' data: https://fonts.gstatic.com https://cdn.lineicons.com https://ayush-portfolio-6mbpetzpe-atgdots-projects.vercel.app; " +
-    "connect-src 'self' https://cdn.lineicons.com https://fonts.googleapis.com https://fonts.gstatic.com; " +
+    "font-src 'self' https://fonts.gstatic.com https://cdn.lineicons.com data: blob: https://ayush-portfolio-hoh0145rk-atgdots-projects.vercel.app; " +
+    "connect-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com; " +
     "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; " +
-    "img-src 'self' data:;"
+    "img-src 'self' data: https://ayush-portfolio-hoh0145rk-atgdots-projects.vercel.app;"
   );  
   next();
 });
