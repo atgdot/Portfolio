@@ -9,7 +9,7 @@ const port = process.env.PORT || 3000;
 
 // Set EJS as the view engine
 app.set("view engine", "ejs");
-app.set("views", "./views");
+app.set("views", "./Views");
 
 // Middleware
 app.use(express.json());
