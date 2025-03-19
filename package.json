@@ -5,8 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "prestart": "npm install",
     "start": "node index.js",
-    "vercel-build": "npm install",
+    "vercel-build": "npm install && cp -r views public .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
