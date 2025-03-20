@@ -7,7 +7,7 @@ import { fileURLToPath } from "url";
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 4000;
+const PORT = process.env.PORT || 4000;
 const HOST = process.env.HOST || "0.0.0.0";
 
 // Resolve __dirname for ES module compatibility
