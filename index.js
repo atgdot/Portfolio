@@ -5,7 +5,7 @@ import nodemailer from "nodemailer";
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = 3000;
 
 // Set EJS as the view engine
 app.set("view engine", "ejs");
@@ -18,7 +18,7 @@ app.use(express.static("Public"));
 
 // Security Headers
 app.use((req, res, next) => {
-  rres.setHeader(
+  res.setHeader(
     "Content-Security-Policy",
     "default-src 'self'; " +
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://cdn.lineicons.com; " +
@@ -77,3 +77,8 @@ app.get("/contact", (req, res) => res.render("contact.ejs"));
 
 // Vercel requires this export
 export default app;
+
+
+app.listen(port, () => {
+  console.log(`🚀 Server is running on http://localhost:${port}`);
+});
