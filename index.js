@@ -8,6 +8,7 @@ dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 4000;
+const HOST = process.env.HOST || "0.0.0.0";
 
 // Resolve __dirname for ES module compatibility
 const __filename = fileURLToPath(import.meta.url);
@@ -39,8 +40,8 @@ app.use((req, res, next) => {
 });
 
 // ✅ Start the Server
-app.listen(port, "0.0.0.0", () => {
-  console.log(`🚀 Server is running on http://0.0.0.0:${port}`);
+app.listen(PORT, HOST, () => {
+  console.log(`🚀 Server is running on http://${HOST}:${PORT}`);
 });
 
 // ✅ Nodemailer Configuration (Check if ENV variables exist)
