@@ -7,29 +7,4 @@ package-lock.json
 # Environment variables
 .env
 
-# Logs
-logs/
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 
-# Build and cache directories
-dist/
-public/build/
-.cache/
-.next/
-out/
-.vscode/
-.DS_Store
-
-# Nginx and PM2 logs (if applicable)
-logs/
-pm2.log
-pm2.pid
-
-# Ignore compiled CSS (if you're using Tailwind)
-public/Styles/*.css
-
-# Ignore uploaded files (if any)
-public/files/
