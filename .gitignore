@@ -8,3 +8,18 @@ package-lock.json
 .env
 
 
+https://github.com/atgdot/Portfolio
+
+server {
+    listen 80;
+    server_name 16.170.232.157;  # Replace with your actual public IP or domain
+
+    location / {
+        proxy_pass http://localhost:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+}

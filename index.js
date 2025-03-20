@@ -5,7 +5,7 @@ import nodemailer from "nodemailer";
 dotenv.config();
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 4000;
 
 // Set EJS as the view engine
 app.set("view engine", "ejs");
@@ -28,6 +28,10 @@ app.use((req, res, next) => {
     "img-src 'self' data: https://ayush-portfolio-hoh0145rk-atgdots-projects.vercel.app;"
   );  
   next();
+});
+
+app.listen(port, "0.0.0.0", () => {
+  console.log(`🚀 Server is running on http://0.0.0.0:${port}`);
 });
 
 // Nodemailer Configuration
@@ -79,6 +83,4 @@ app.get("/contact", (req, res) => res.render("contact.ejs"));
 export default app;
 
 
-app.listen(port, () => {
-  console.log(`🚀 Server is running on http://localhost:${port}`);
-});
+
